@@ -1,0 +1,48 @@
+h1 {
+	color: #0000FF;
+}
+
+h2 {
+	color: #FF0000;
+}
+
+footer {
+	margin-top: 60px;
+}
+
+.loginContainer {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.box {
+	background-repeat: no-repeat;
+	text-align: center;
+	vertical-align: middle;
+	background-size: 130px 100px;
+	width: 130px;
+	height: 100px;
+}
+
+.green {
+	background-image: url(../img/greenbox.png);
+}
+
+.red {
+	background-image: url(../img/redbox.png);
+}
+
+.blue {
+	background-image: url(../img/bluebox.png);
+}
+
+.arrow {
+	background-image: url(../img/arrow.png);
+	background-repeat: no-repeat;
+	background-size: 50px 25px;
+	width: 50px;
+	height: 25px;
+	vertical-align: middle;
+}

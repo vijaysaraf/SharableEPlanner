@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Excel Enclosures : Order</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+<link rel="stylesheet" type="text/css"
+	href="../../dhtmlx/windows/codebase/fonts/font_roboto/roboto.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../dhtmlx/windows/codebase/dhtmlxwindows.css" />
+<script src="../../dhtmlx/windows/codebase/dhtmlxwindows.js"></script>
+<script src="../../dhtmlx/suite/codebase/dhtmlx.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../../boot-table/bootstrap-table.min.css" />
+<script src="../../boot-table/bootstrap-table.min.js"></script>
+
+<style>
+div#newWindow {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	/* font-family: Roboto, Arial, Helvetica; */
+	font-size: 14px;
+	color: #404040;
+	overflow: auto;
+}
+
+</style>
+<script src="../../js/order.js"></script>
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header" />
+
+
+	<div class="container" id='container'>
+		<h3>Purchase Orders</h3>
+
+		<div id="toolbar">
+			<button id="addBtn" class="btn btn-default"
+				onclick="showWindow('add')">Add Order</button>
+			<button id="editBtn" class="btn btn-default"
+				onclick="showWindow('edit')">Edit Order</button>
+			<button id="deleteBtn" class="btn btn-default"
+				onclick="deleteRecord()">Delete Order</button>
+			<button id="proposeEventsBtn" class="btn btn-default"
+				onclick="showEvents()">Show Order Schedule</button>
+		</div>
+		<table id="table"></table>
+
+		<div id="newWindow" class="well" style="display: none; align: center">
+
+			<fieldset>
+				<div id='error' class="alert alert-danger" style='display: none'></div>
+
+				<div class="form-group">
+					<label for="customerId">Customer</label> <select id="customerId"
+						name="customerId" class="form-control input-sm">
+						<option value="">-- Select Customer --</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="orderNumber">Purchase Order Number</label> <input type="text"
+						name="orderNumber" id="orderNumber" class="form-control input-sm"
+						placeholder="Purchas Order No." />
+				</div>
+				<div class="form-group">
+					<label for="jobNumber">Job Number</label> <input type="text"
+						name="jobNumber" id="jobNumber" class="form-control input-sm"
+						placeholder="Job Number" />
+				</div>
+				<div class="form-group">
+					<label for="designId">Design Id</label> <input type="text"
+						name="designId" id="designId" class="form-control input-sm"
+						placeholder="Design Id" />
+				</div>
+				<div class="form-group">
+					<label for="isNew">Is New ?</label> <select class="form-control"
+							id="isNew">
+							<option value='Y'>New Design</option>
+							<option value='N'>Existing Design</option>
+						</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="width">Width</label> <input type="text"
+						name="width" id="width" class="form-control input-sm"
+						placeholder="Width" />
+				</div>
+				<div class="form-group">
+					<label for="depth">Depth</label> <input type="text"
+						name="depth" id="depth" class="form-control input-sm"
+						placeholder="Depth" />
+				</div>
+				<div class="form-group">
+					<label for="height">Height</label> <input type="text"
+						name="height" id="height" class="form-control input-sm"
+						placeholder="Height" />
+				</div>
+				<div class="form-group">
+					<label for="quantity">Quantity</label>  <input type="text"
+						name="quantity" id="quantity" class="form-control input-sm"
+						placeholder="Quantity" />
+				</div>
+
+				<div class="form-group">
+					<label for="productType">Product Type</label> <select
+						id="productType" name="productType" class="form-control input-sm">
+						<option value="">-- Select Product --</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="displayStartDate">Start Date (expected in dd/mm/yyyy)</label> <input type="text"
+						name="displayStartDate" id="displayStartDate" class="form-control input-sm"
+						placeholder="Start Date" />
+				</div>
+				<div>
+					<input type='button' class="btn btn-default" name='saveBtn'
+						id='saveBtn' value='Save' onClick='saveRecord()' /> <input
+						type='button' class="btn btn-default" name='cancelBtn'
+						id='cancelBtn' value='Cancel' onClick='hideWindow()' />
+				</div>
+			</fieldset>
+
+		</div>
+	</div>
+	<script>
+		populateTable();
+	</script>
+	<div th:replace="fragments/footer :: footer" />
+
+</body>
+</html>

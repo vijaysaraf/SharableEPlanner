@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Excel Enclosures : Phases</title>
+
+<div th:replace="fragments/header :: header-css" />
+
+<link rel="stylesheet" type="text/css"
+	href="../../dhtmlx/windows/codebase/fonts/font_roboto/roboto.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../dhtmlx/windows/codebase/dhtmlxwindows.css" />
+<script src="../../dhtmlx/windows/codebase/dhtmlxwindows.js"></script>
+<script src="../../dhtmlx/suite/codebase/dhtmlx.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../../boot-table/bootstrap-table.min.css" />
+<script src="../../boot-table/bootstrap-table.min.js"></script>
+<style>
+div#newWindow {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	/* font-family: Roboto, Arial, Helvetica; */
+	font-size: 14px;
+	color: #404040;
+	overflow: auto;
+}
+</style>
+<script src="../../js/phase.js"></script>
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header" />
+
+
+	<div class="container" id='container'>
+		<h3>Phases</h3>
+
+		<div id="toolbar" style='align: right'>
+			<button id="addBtn" class="btn btn-default"
+				onclick="showWindow('add')">Add Phase</button>
+			<button id="editBtn" class="btn btn-default"
+				onclick="showWindow('edit')">Edit Phase</button>
+			<button id="deleteBtn" class="btn btn-default"
+				onclick="deleteRecord()">Delete Phase</button>
+		</div>
+		<table id="table"></table>
+
+		<div id="newWindow" class="well" style="display: none; align: center">
+
+			<fieldset>
+				<div id='error' class="alert alert-danger" style='display: none'></div>
+
+				<div class="form-group">
+					<label for="name">Phase Name</label>
+					<select
+						id="name" name="name"
+						class="form-control input-sm">
+						<option value="">-- Select Phase --</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="defaultManPower">Man Power(Default)</label>
+					 <select
+						id="defaultManPower" name="defaultManPower"
+						class="form-control input-sm">
+						<option value="0">-- Select Man Power --</option>
+					</select>
+				</div>
+				<div>
+					<input type='button' class="btn btn-default" name='saveBtn'
+						id='saveBtn' value='Save' onClick='saveRecord()' /> <input
+						type='button' class="btn btn-default" name='cancelBtn'
+						id='cancelBtn' value='Cancel' onClick='hideWindow()' />
+				</div>
+			</fieldset>
+
+		</div>
+	</div>
+	<script>
+		populateTable();
+	</script>
+	<div th:replace="fragments/footer :: footer" />
+
+</body>
+</html>

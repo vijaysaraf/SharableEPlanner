@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<div th:fragment="header-css">
+
+	<link rel="stylesheet" type="text/css"
+		href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="/css/main.css" />
+
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+</div>
+</head>
+<body>
+	<div th:fragment="header" class="container-fluid">
+		<!-- this is header -->
+		<img alt="Home" th:src="@{/img/logonew.jpg}" />
+
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/admin/users}">Users</a></li>
+					<li><a th:href="@{/admin/customers}">Customers</a></li>
+					<li><a th:href="@{/admin/phases}">Phases</a></li>
+					<li><a th:href="@{/admin/references}">Product Types</a></li>
+					<li><a th:href="@{/admin/calculations}">Calculations</a></li>
+					<li><a th:href="@{/admin/orders}">Purchase Orders</a></li>
+					<li><a th:href="@{/admin/schedule}">Schedule</a></li>
+					<li><a th:href="@{/admin/planning}">Planning</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+
+					<li sec:authorize="!isAuthenticated()"><a th:href="@{/admin}"><span
+							class="glyphicon glyphicon-user"></span> Admin Login</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
+							sec:authentication="name"></span>&nbsp;|&nbsp;Sign Out&nbsp;</a></li>
+
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div th:fragment="header-no-login" class="container-fluid">
+		<!-- this is header -->
+		<img alt="Home" th:src="@{/img/logonew.jpg}" />
+
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				<ul sec:authorize="!isAuthenticated()" class="nav navbar-nav">
+					<li class="active"><a th:href="@{/}">Home</a></li>
+				</ul>
+				<ul sec:authorize="isAuthenticated()" class="nav navbar-nav">
+
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/admin/customers}">Customers</a></li>
+					<li><a th:href="@{/admin/phases}">Phases</a></li>
+					<li><a th:href="@{/admin/references}">Product Types</a></li>
+					<li><a th:href="@{/admin/calculations}">Calculations</a></li>
+					<li><a th:href="@{/admin/orders}">Purchase Orders</a></li>
+					<li><a th:href="@{/admin/schedule}">Schedule</a></li>
+					<li><a th:href="@{/admin/planning}">Planning</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+
+					<li sec:authorize="!isAuthenticated()"><a th:href="@{/admin}"><span
+							class="glyphicon glyphicon-user"></span> Admin Login</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
+							sec:authentication="name"></span>&nbsp;|&nbsp;Sign Out&nbsp;</a></li>
+
+				</ul>
+
+			</div>
+		</nav>
+	</div>
+
+</body>
+</html>
