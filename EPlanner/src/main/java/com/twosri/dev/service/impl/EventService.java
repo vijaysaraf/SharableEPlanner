@@ -115,15 +115,6 @@ public class EventService implements IEventService {
 		List<JSEvent> jsEvents = eventAdviser.getJavaScriptEvents(null, eventList);
 		return jsEvents;
 	}
-
-	/*
-	 * public void find() { Query query4 = new Query();
-	 * query4.addCriteria(Criteria.where("age").lt(40).and("age").gt(10));
-	 * 
-	 * List<User> userTest4 = MongoOperations.find(query4, User.class);
-	 * System.out.println("query4 - " + query4.toString()); }
-	 */
-
 	public Date getUtilDate(LocalDateTime localDateTime) {
 		return java.sql.Timestamp.valueOf(localDateTime);
 	}

@@ -1,22 +1,21 @@
 var myTabbar;
 var phases = new Array();
+var allEvents = new Array();
 function loadData() {
-	$.ajax({
-		type : 'GET',
-		url : "/admin/phases/names",
-		success : function(res) {
-			phases = res;
-		},
-		async : false
-	});
+	$.ajax({ type : 'GET', url : "/admin/phases/names",	success : function(res) { phases = res;	}, async : false	});
 }
 function init() {
 	loadData();
-	myTabbar = new dhtmlXTabBar("my_tabbar");
+	/*myTabbar = new dhtmlXTabBar("my_tabbar");
 	myTabbar.attachEvent("onTabClick", function(id, lastId) {
-		myTabbar.tabs(lastId).detachObject("table");
-		myTabbar.tabs(id).attachObject("table");
-		// TODO
+		alert(id);
+		myTabbar.tabs(lastId).detachObject("schedulerDiv");
+		myTabbar.tabs(id).attachObject("schedulerDiv");
+		scheduler.clearAll();
+		var phaseName = id.substring(id.indexOf("_") + 1, id.length);
+		var tempEvent = getEvents(phaseName);
+		scheduler.parse(tempEvent, "json");
+		scheduler.setCurrentView(tempEvent[0].start_date);
 	});
 	for (var i = 0; i < phases.length; i++) {
 		if (i == 0) {
@@ -25,15 +24,26 @@ function init() {
 		} else {
 			myTabbar.addTab("tab_" + phases[i], phases[i]);
 		}
-	}
+	}*/
+	
 }
 function populateTable() {
+	init();
 	$('#table').bootstrapTable({
 		url : '/admin/summary/load',
 		columns : [ {
 			field : 'state',
 			title : 'Select',
 			radio : true
+		},{
+			field : 'phaseName',
+			title : 'Phase',
+			align : 'center',
+			valign : 'middle',
+			visible : true,
+			searchable : true,
+			sortable : true
+
 		}, {
 			field : 'id',
 			title : 'Id',
@@ -43,29 +53,22 @@ function populateTable() {
 			searchable : false
 
 		}, {
-			field : 'customerName',
-			title : 'Customer',
-			align : 'center',
-			valign : 'middle',
-			sortable : true
-
-		}, {
 			field : 'orderNumber',
-			title : 'Purchase Order Number',
+			title : 'PO Number',
 			align : 'center',
 			valign : 'middle',
 			sortable : true
 
 		}, {
 			field : 'jobNumber',
-			title : 'Job Number',
+			title : 'Job',
 			align : 'center',
 			valign : 'middle',
 			sortable : true
 
 		}, {
 			field : 'designId',
-			title : 'Design Id',
+			title : 'Design',
 			align : 'center',
 			valign : 'middle',
 			sortable : true
@@ -115,6 +118,20 @@ function populateTable() {
 		}, {
 			field : 'displayStartDate',
 			title : 'Start Date',
+			align : 'center',
+			valign : 'middle',
+			sortable : true
+
+		}, {
+			field : 'displayEndDate',
+			title : 'End Date',
+			align : 'center',
+			valign : 'middle',
+			sortable : true
+
+		}, {
+			field : 'hrsRequired',
+			title : 'Calculated Hrs.',
 			align : 'center',
 			valign : 'middle',
 			sortable : true

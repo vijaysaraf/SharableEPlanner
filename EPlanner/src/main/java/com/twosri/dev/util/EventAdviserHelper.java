@@ -80,7 +80,7 @@ public class EventAdviserHelper {
 	public ProcessingAttributes generateChunk(Order order, Phase phase, LocalDateTime minimumStartDate,
 			LocalDateTime tentativeEndDate) {
 		ProcessingAttributes attributes = null;
-		
+
 		if (minimumStartDate.isBefore(tentativeEndDate)) {
 			if (phase.getName().equals(PhaseEnum.PC.name()))
 				return createOutSourceEvent(order, phase, minimumStartDate, tentativeEndDate);
@@ -194,7 +194,6 @@ public class EventAdviserHelper {
 		return java.sql.Timestamp.valueOf(localDateTime);
 	}
 
-	
 	private LocalDateTime getBaselineStartDate(Phase phase, Date minimumStartDate) {
 		Event existingEvent = eventService.findAnyGreaterThanGivenDate(phase.getId(), minimumStartDate);
 		if (existingEvent == null) {
@@ -202,7 +201,7 @@ public class EventAdviserHelper {
 				return getLocalDateTime(minimumStartDate).with(getDayStart());
 			else
 				return getLocalDateTime(minimumStartDate);
-		} else 
+		} else
 			return getLocalDateTime(existingEvent.getEndDate());
 		/*
 		 * } else { existingEvents.sort(new Comparator<Event>() {
@@ -228,10 +227,7 @@ public class EventAdviserHelper {
 	public LocalDateTime getTentativeEndDate(Order order, Phase phase, LocalDateTime availableStartDate) {
 		long calculatedRequiredTime = 0;
 		if (phase.getName().equals(PhaseEnum.DESIGN.name())) {
-			if (order.isNew())
-				calculatedRequiredTime = getTimeForNewDesign();
-			else
-				calculatedRequiredTime = getTimeForExistingDesign();
+			calculatedRequiredTime = getDesignTime(order);
 		} else if (phase.getName().equals(PhaseEnum.PC.name())) {
 			return availableStartDate.plusDays(1).with(getDayEnd());
 		} else {
@@ -240,7 +236,8 @@ public class EventAdviserHelper {
 		LocalDateTime calculatedEndDate = availableStartDate.plus(calculatedRequiredTime, ChronoUnit.MINUTES);
 		return calculatedEndDate;
 	}
-
+	
+	
 	// TODO change from long to double
 	public long getTimeRequiredInMinutes(Order order, Phase phase) {
 		Calculation calculation = calService.findByProductTypeAndPhaseId(order.getProductType(), phase.getId());
@@ -314,6 +311,15 @@ public class EventAdviserHelper {
 
 	private Duration getBreakDuration() {
 		return Duration.between(getBreakStartTime(), getBreakEndTime());
+	}
+
+	public long getDesignTime(Order order) {
+		long calculatedRequiredTime = -1;
+		if (order.isNew())
+			calculatedRequiredTime = getTimeForNewDesign();
+		else
+			calculatedRequiredTime = getTimeForExistingDesign();
+		return calculatedRequiredTime;
 	}
 
 	private long getTimeForNewDesign() {

@@ -1,38 +1,37 @@
-<!doctype html>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>Excel Enclosures : Proposal</title>
-</head>
+<title>Excel Enclosures : Daily Summary</title>
+
+<div th:replace="fragments/header :: header-css" />
+
 <link rel="stylesheet" type="text/css"
-	href="../../dhtmlx/suite/codebase/fonts/font_roboto/roboto.css" />
-<script src="../../dhtmlx/suite/codebase/dhtmlx.js"
-	type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" href="../../dhtmlx/suite/codebase/dhtmlx.css"
-	type="text/css" charset="utf-8" />
+	href="../../dhtmlx/windows/codebase/fonts/font_roboto/roboto.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../dhtmlx/windows/codebase/dhtmlxwindows.css" />
+<script src="../../dhtmlx/windows/codebase/dhtmlxwindows.js"></script>
+<script src="../../dhtmlx/suite/codebase/dhtmlx.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../../boot-table/bootstrap-table.min.css" />
+<script src="../../boot-table/bootstrap-table.min.js"></script>
 
-<script src="../../dhtmlx/scheduler/codebase/dhtmlxscheduler.js"
-	type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet"
-	href="../../dhtmlx/scheduler/codebase/dhtmlxscheduler.css"
-	type="text/css" charset="utf-8" />
-	
-<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>	
-<script src="../../js/schedule.js"></script>
-
-<style type="text/css">
-html, body {
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
-	overflow: hidden;
-}
-</style>
-
+<script src="../../js/summary.js"></script>
+</head>
 <body>
-	<div id="my_tabbar" style="width: 100% x; height: 100%;"></div>
-	<table id="table"></table>
+
+	<div th:replace="fragments/header :: header" />
+
+
+	<div class="container" id='container'>
+		<h3>Daily Summary</h3>
+		<table id="table"></table>
+
+	</div>
 	<script>
-		init();
+		populateTable();
 	</script>
+	<div th:replace="fragments/footer :: footer" />
 
 </body>
+</html>

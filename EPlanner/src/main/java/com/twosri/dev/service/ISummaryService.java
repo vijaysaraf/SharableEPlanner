@@ -13,4 +13,10 @@ public interface ISummaryService {
 	Summary findOne(String id);
 
 	Summary save(Summary saved);
+
+	List<Summary> save(List<Summary> toBeSaved);
+
+	void deleteAll();
+
+	void deleteByOrderId(String orderId);
 }

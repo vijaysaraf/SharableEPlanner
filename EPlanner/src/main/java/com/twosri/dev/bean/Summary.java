@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Summary {
 	private String id;
+	private String orderId;
 	private String orderNumber;
 	private String jobNumber;
 	private String designId;
@@ -14,6 +15,7 @@ public class Summary {
 	private int height;
 	private int quantity;
 	private String productName;
+	private String phaseId;
 	private String phaseName;
 	private String displayStartDate;
 	private String displayEndDate;

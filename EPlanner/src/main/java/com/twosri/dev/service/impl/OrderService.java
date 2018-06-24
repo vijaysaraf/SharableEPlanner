@@ -43,9 +43,14 @@ public class OrderService implements IOrderService {
 	@Autowired
 	EventAdviser eventAdviser;
 
+	@Autowired
+	SummaryService summaryService;
+
 	@Override
 	public void delete(Order deleted) {
 		try {
+			summaryService.deleteAll();
+			summaryService.deleteByOrderId(deleted.getId());
 			eventService.deleteByOrderId(deleted.getId());
 			repository.delete(deleted.getId());
 		} catch (Exception e) {
@@ -76,6 +81,8 @@ public class OrderService implements IOrderService {
 	@Override
 	public Order findOne(String id) {
 		OrderEntity entity = repository.findOne(id);
+		if (entity == null)
+			return new Order();
 		return mMapper.map(entity, Order.class);
 	}
 

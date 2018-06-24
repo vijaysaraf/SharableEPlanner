@@ -14,6 +14,7 @@ import com.twosri.dev.bean.Phase;
 import com.twosri.dev.service.cache.CacheManager;
 import com.twosri.dev.util.EventAdviserHelper;
 import com.twosri.dev.util.PhaseEnum;
+import com.twosri.dev.util.SummaryHelper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +33,9 @@ public class EventAdviser {
 
 	@Autowired
 	CacheManager cacheManager;
+	
+	@Autowired
+	SummaryHelper summaryHelper;
 
 	public List<Event> pushEvents(String orderId) {
 		log.info("enter.pushEvents");
@@ -45,6 +49,7 @@ public class EventAdviser {
 			if (phase == null || phase.getId() == null)
 				phase = new Phase(phaseNames[i], phaseNames[i], PhaseEnum.valueOf(phaseNames[i]).ordinal(), 1);
 			List<Event> events = adviserHelper.getEventChunks(order, phase, startDate);
+			summaryHelper.pushSummary(order, phase, events);
 			startDate.setTime(events.get(events.size() - 1).getEndDate().getTime());
 			allEvents.addAll(events);
 		}

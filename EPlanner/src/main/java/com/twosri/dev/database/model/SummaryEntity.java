@@ -9,7 +9,7 @@ public class SummaryEntity {
 	private String id;
 	private String orderId;
 	private String phaseId;
-	private Date displayStartDate;
-	private Date displayEndDate;
+	private Date startDate;
+	private Date endDate;
 	private double hrsRequired;
 }
